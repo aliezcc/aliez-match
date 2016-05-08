@@ -1,0 +1,26 @@
+{
+  "name": "aliez-match",
+  "version": "1.1.2",
+  "description": "aliez route matcher",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.coding.net/wallax/aliez-match.git"
+  },
+  "dependencies": {
+  	"aliez": "*"
+  },
+  "keywords": [
+    "web",
+    "server",
+    "aliez",
+    "http",
+    "route",
+    "rule"
+  ],
+  "author": "wallax",
+  "license": "Apache-2.0"
+}
