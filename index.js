@@ -35,6 +35,8 @@ module.exports = function(req, res, done){
 	assert(res instanceof http.ServerResponse, 'Invalid argument');
 	assert('function' == typeof done, 'Invalid argument');
 	
+	res.statusCode = 404;
+	
 	req.match = function(rule, cb){
 		assert(rule instanceof RegExp || 'string' == typeof rule, 'Invalid argument');
 		assert('function' == typeof cb, 'Invalid argument');
@@ -47,6 +49,7 @@ module.exports = function(req, res, done){
 			if(result){
 				var tmp = result.length > 1 ? result.slice(1) : [];
 				req.REQUEST = tmp;
+				res.statusCode = 200;
 				cb.call(this, req, res);
 			}
 		}else{
@@ -58,9 +61,16 @@ module.exports = function(req, res, done){
 				var tmp = {};
 				for(var i = 0; i < name.length; i++) tmp[name[i]] = val[i];
 				req.REQUEST = tmp;
+				res.statusCode = 200;
 				cb.call(this, req, res);
 			}
 		}
+	};
+	
+	req.default = function(cb){
+		assert('function' == typeof cb, 'Invalid argument');
+		
+		if(res.statusCode == 404) cb.call(this, req, res);
 	}
 	
 	done();
